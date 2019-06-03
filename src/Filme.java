@@ -16,7 +16,9 @@ public class Filme {
 		this.estoque = estoque;
 	}
 	
-	
+	public Filme() {
+		
+	}
 	
 	public void cadastrarFilme(int id, String nome, String classificacao, int estoque) {
 		Filme filme = new Filme(id, nome, classificacao, estoque);
