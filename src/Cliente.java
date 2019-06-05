@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-
 public class Cliente {
 	
 	private String nome;
 	private String cpf;
 	private String endereco;
 	private String dataNasc;
-	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+	
 	
 	public Cliente(String nome, String cpf, String endereco, String dataNasc) {
 		this.nome = nome;
@@ -17,24 +15,6 @@ public class Cliente {
 	
 	public Cliente() {
 		
-	}
-	
-	public int encontrarCliente(String cpf) {
-		for(int i = 0; i < clientes.size(); i++) {
-			if(clientes.get(i).getCpf().equals(cpf)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public Cliente retornaCliente(String cpf) {
-		return clientes.get(encontrarCliente(cpf));
-	}
-
-	public void cadastrarCliente(String nome, String cpf, String endereco, String dataNasc) {
-		Cliente cliente = new Cliente(nome, cpf, endereco, dataNasc);
-		clientes.add(cliente);
 	}
 	
 	public String getNome() {
