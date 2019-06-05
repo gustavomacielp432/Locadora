@@ -11,8 +11,6 @@ public class Dashboard {
 
 	public static void main(String[] args) {
 
-		Filme filme = new Filme();
-		Cliente cliente = new Cliente();
 		Locadora locadora = new Locadora("Locadora de Filmes TPII");
 		int id = 0;		
 
@@ -29,7 +27,7 @@ public class Dashboard {
 				String cpf = JOptionPane.showInputDialog("Digite o CPF");
 				String endereco = JOptionPane.showInputDialog("Digite o endereço");
 				String dataNasc = JOptionPane.showInputDialog("Digite a data de nascimento");
-				cliente.cadastrarCliente(nomeCli, cpf, endereco, dataNasc);
+				locadora.cadastrarCliente(nomeCli, cpf, endereco, dataNasc);
 				break;
 			}
 
@@ -47,26 +45,24 @@ public class Dashboard {
 					}
 				} while (true);
 				id = id + 1;
-				filme.cadastrarFilme(id,nomeFilm, classificacao, estoque);
+				locadora.cadastrarFilme(id,nomeFilm, classificacao, estoque);
 				break;		
 			}
 
 			case 3: {
 				
 				String strEstoque = "";
-				ArrayList<Filme> filmes = new ArrayList<>(filme.getFilmes());
-				for (int i = 0; i < filmes.size(); i++) {
-					strEstoque = strEstoque + filmes.get(i).visualizarFilmes() + "\n";
-				}
 				
 				int idAlugar = Integer.parseInt(JOptionPane.showInputDialog(locadora.getNome() + "\n\n" + strEstoque 
 						+ "\n" + "Digite o ID do filme que deseja alugar:\n\n"));
 
 				String cpfAlugar = JOptionPane.showInputDialog(locadora.getNome() + "\n" + "Digite o CPF do cliente");
-				if((cliente.encontrarCliente(cpfAlugar) != -1) && (filme.encontrarFilme(idAlugar) != -1)) {
-					String nomeCli = cliente.retornaCliente(cpfAlugar).getNome();
-					String nomeFilme = filme.retornaFilme(idAlugar).getNome();
-					locadora.alugarFilme(filme, cliente, nomeCli, cpfAlugar, idAlugar, nomeFilme);
+				
+				if((locadora.encontrarCliente(cpfAlugar) != -1) && (locadora.encontrarFilme(idAlugar) != -1)) {
+					Filme filmeAlugar = locadora.retornaFilme(idAlugar);
+					Cliente clienteAlugar = locadora.retornaCliente(cpfAlugar);
+					
+					locadora.alugarFilme(filmeAlugar, clienteAlugar);
 				}else {
 					JOptionPane.showMessageDialog(null, "ID e/ou CPF incorretos.", "Atenção!", 0);
 				}		
@@ -77,7 +73,7 @@ public class Dashboard {
 			case 4: {
 				
 				String strEstoque = "";
-				ArrayList<Filme> filmes = new ArrayList<>(filme.getFilmes());
+				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
 				for (int i = 0; i < filmes.size(); i++) {
 					strEstoque = strEstoque + filmes.get(i).visualizarFilmes() + "\n";
 				}
