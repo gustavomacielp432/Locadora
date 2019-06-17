@@ -1,10 +1,10 @@
 public class FilmeAlugado {
-	
+
 	private int id;
 	private String nomeFilme;
 	private String nomeCli;
 	private String cpf;
-	
+
 	public FilmeAlugado(int id, String nomeFilme, String nomeCli, String cpf) {
 		super();
 		this.id = id;
@@ -44,9 +44,10 @@ public class FilmeAlugado {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+
 	public String visualizarFilmes() {
-		return "ID: " + id + " | "  + "Nome: " + nomeFilme + " | " + "Nome do cliente: " + nomeCli + " | " + "CPF: " + cpf;
+		return "ID: " + id + " | " + "Nome: " + nomeFilme + " | " + "Nome do cliente: " + nomeCli + " | " + "CPF: "
+				+ cpf;
 	}
-	
+
 }
