@@ -1,53 +1,53 @@
-public class FilmeAlugado {
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
-	private int id;
-	private String nomeFilme;
-	private String nomeCli;
-	private String cpf;
+@Entity
+public class FilmeAlugado extends BaseEntity{
+	
+	private static final long serialVersionUID = -5664509326437291197L;
 
-	public FilmeAlugado(int id, String nomeFilme, String nomeCli, String cpf) {
-		super();
-		this.id = id;
-		this.nomeFilme = nomeFilme;
-		this.nomeCli = nomeCli;
-		this.cpf = cpf;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "filme_id")
+	private Filme filme;
+	
+	
+	public FilmeAlugado() {
+		
+	}
+	
+	public FilmeAlugado(Cliente cliente, Filme filme) {
+		this.cliente = cliente;
+		this.filme = filme;
 	}
 
-	public int getId() {
-		return id;
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public String getNomeFilme() {
-		return nomeFilme;
+
+	public Filme getFilme() {
+		return filme;
 	}
 
-	public void setNomeFilme(String nomeFilme) {
-		this.nomeFilme = nomeFilme;
+
+	public void setFilme(Filme filme) {
+		this.filme = filme;
 	}
 
-	public String getNomeCli() {
-		return nomeCli;
-	}
-
-	public void setNomeCli(String nomeCli) {
-		this.nomeCli = nomeCli;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
+	
 	public String visualizarFilmes() {
-		return "ID: " + id + " | " + "Nome: " + nomeFilme + " | " + "Nome do cliente: " + nomeCli + " | " + "CPF: "
-				+ cpf;
+		return cliente.toString()+"| "+filme.visualizarFilmes();
 	}
-
+	
 }

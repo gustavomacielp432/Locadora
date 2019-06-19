@@ -1,29 +1,26 @@
-public class Filme {
+import javax.persistence.Entity;
 
-	private int id;
+@Entity
+public class Filme extends BaseEntity{
+	
+	private static final long serialVersionUID = -653598860173216554L;
+
+	
 	private String nome;
 	private String classificacao;
 	private int estoque;
-
-	public Filme(int id, String nome, String classificacao, int estoque) {
-		this.id = id;
+	
+	
+	public Filme(String nome, String classificacao, int estoque) {
 		this.nome = nome;
 		this.classificacao = classificacao;
 		this.estoque = estoque;
 	}
-
+	
 	public Filme() {
-
+		
 	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}
@@ -47,12 +44,10 @@ public class Filme {
 	public void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
-
-	public void diminuirEstoque() {
-		this.estoque--;
-	}
+	
+	
 
 	public String visualizarFilmes() {
-		return "ID: " + id + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " + "Class.: " + classificacao;
+		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " +  "Class.: " + classificacao;
 	}
 }
