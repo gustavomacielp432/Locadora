@@ -1,79 +1,33 @@
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 public class Locadora {
-
+	
+	private FilmeDAO filmeDAO = new FilmeDAO();
+	private FilmeAlugadoDAO filmeAlugadoDAO = new FilmeAlugadoDAO();
+	private ClienteDAO clienteDAO = new ClienteDAO();
 	private String nome;
-	private ArrayList<FilmeAlugado> filmesAlugados = new ArrayList<FilmeAlugado>();
-	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-	private ArrayList<Filme> filmes = new ArrayList<Filme>();
 
 	public Locadora(String nome) {
 		this.nome = nome;
 	}
-
+	
 	public void alugarFilme(Filme filme, Cliente cliente) {
-
-		if (filme != null && filme.getId() != -1 && cliente != null && !cliente.getCpf().isEmpty()) {
-			if (filme.getEstoque() > 0) {
-				filme.diminuirEstoque();
-				FilmeAlugado filmeAlugado = new FilmeAlugado(filme.getId(), filme.getNome(), cliente.getNome(),
-						cliente.getCpf());
-				filmesAlugados.add(filmeAlugado);
-				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "AtenÁ„o!", 1);
-
-			} else {
-				JOptionPane.showMessageDialog(null, "Estoque insuficiente.", "AtenÁ„o!", 0);
+		
+		if(filme!=null && filme.getId()!=-1 && cliente!=null && !cliente.getCpf().isEmpty()) {
+			if(filme.getEstoque() > 0) {
+				FilmeAlugado filmeAlugado = new FilmeAlugado(cliente,filme);
+				filmeAlugadoDAO.salvar(filmeAlugado);
+				filmeDAO.diminuirEstoque(filme);
+				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "Aten√ß√£o!", 1);
+			
+			}else {
+				JOptionPane.showMessageDialog(null, "Estoque insuficiente.", "Aten√ß√£o!", 0);
 			}
-		} else {
-			JOptionPane.showMessageDialog(null, "CPF n„o cadastrado.", "AtenÁ„o!", 0);
+		}else {
+			JOptionPane.showMessageDialog(null, "CPF n√£o cadastrado.", "Aten√ß√£o!", 0);
 		}
-	}
-
-	public int encontrarCliente(String cpf) {
-		for (int i = 0; i < clientes.size(); i++) {
-			if (clientes.get(i).getCpf().equals(cpf)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	public Cliente retornaCliente(String cpf) {
-		return clientes.get(encontrarCliente(cpf));
-	}
-
-	public void cadastrarCliente(String nome, String cpf, String endereco, String dataNasc) {
-		Cliente cliente = new Cliente(nome, cpf, endereco, dataNasc);
-		clientes.add(cliente);
-	}
-
-	public void cadastrarFilme(int id, String nome, String classificacao, int estoque) {
-		Filme filme = new Filme(id, nome, classificacao, estoque);
-		System.out.println(id + "|" + nome + "|" + classificacao + "|" + estoque);
-		filmes.add(filme);
-	}
-
-	public int encontrarFilme(int id) {
-		for (int i = 0; i < filmes.size(); i++) {
-			if (filmes.get(i).getId() == id) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	public ArrayList<Filme> getFilmes() {
-		return filmes;
-	}
-
-	public void setFilmes(ArrayList<Filme> filmes) {
-		this.filmes = filmes;
-	}
-
-	public Filme retornaFilme(int id) {
-		return filmes.get(encontrarFilme(id));
 	}
 
 	public String getNome() {
@@ -84,12 +38,42 @@ public class Locadora {
 		this.nome = nome;
 	}
 
-	public ArrayList<FilmeAlugado> getFilmesAlugados() {
-		return filmesAlugados;
+	public List<FilmeAlugado>filmesAlugados(){
+		return filmeAlugadoDAO.getList();
+	}
+	
+	public Cliente encontrarCliente(String cpf) {
+		return clienteDAO.buscarClientePorCPF(cpf);
+	}
+	
+	public Cliente retornaCliente(int id) {
+		return clienteDAO.buscarPorChavePrimaria(id);
+	}
+	
+	public List<Cliente> listarClientes() {
+		return clienteDAO.getList();
 	}
 
-	public void setFilmesAlugados(ArrayList<FilmeAlugado> filmesAlugados) {
-		this.filmesAlugados = filmesAlugados;
+	public void cadastrarCliente(String nome, String cpf, String endereco, String dataNasc) {
+		Cliente cliente = new Cliente(nome, cpf, endereco, dataNasc);
+		clienteDAO.salvar(cliente);
 	}
+	
+	public void cadastrarFilme(String nome, String classificacao, int estoque) {
+		Filme filme = new Filme(nome, classificacao, estoque);
+		filmeDAO.salvar(filme);		
+	}
+	
+	public Filme encontrarFilme(int id) {
+		return filmeDAO.buscarPorChavePrimaria(id);
+	}
+	
+	
+	public List<Filme> getFilmes() {
+		return filmeDAO.getList();
+	}
+
+	
+	
 
 }
