@@ -1,3 +1,5 @@
+package org.locadora.dao;
+import org.locadora.model.Filme;
 
 public class FilmeDAO extends GenericDAO<Filme, Integer> {
 	public FilmeDAO() {

@@ -1,6 +1,14 @@
+package org.locadora.controller;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+
+import org.locadora.dao.ClienteDAO;
+import org.locadora.dao.FilmeAlugadoDAO;
+import org.locadora.dao.FilmeDAO;
+import org.locadora.model.Cliente;
+import org.locadora.model.Filme;
+import org.locadora.model.FilmeAlugado;
 
 public class Locadora {
 	

@@ -1,3 +1,4 @@
+package org.locadora.model;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
