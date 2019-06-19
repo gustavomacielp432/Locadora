@@ -1,5 +1,7 @@
+package org.locadora.dao;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.locadora.model.Cliente;
 
 public class ClienteDAO extends GenericDAO< Cliente, Integer>{
 	

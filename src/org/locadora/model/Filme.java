@@ -1,3 +1,4 @@
+package org.locadora.model;
 import javax.persistence.Entity;
 
 @Entity

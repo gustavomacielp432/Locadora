@@ -1,11 +1,18 @@
+package org.locadora.controller;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.locadora.model.Cliente;
+import org.locadora.model.Filme;
+import org.locadora.model.FilmeAlugado;
+
 /*
  * Andreia Letícia de Faria
  * 117114337
+ * Gustavo Maciel Pimenta
+ * 11621522
  */
 
 public class Dashboard {
@@ -111,9 +118,16 @@ public class Dashboard {
 				}
 			}
 
-			op = Integer.parseInt(JOptionPane.showInputDialog(
-					"Selecione uma opção:\n1 - Cadastrar cliente\n2 - Cadastrar filme\n3 - Alugar Filme\n"
-							+ "4 - Visualizar estoque\n5 - Relatório de filmes alugados\nPressione outra tecla para sair."));
+			op = Integer.parseInt(JOptionPane
+					.showInputDialog("Selecione uma opção:\n"
+							+ "1 - Cadastrar cliente\n"
+							+ "2 - Cadastrar filme\n"
+							+ "3 - Alugar Filme\n"
+							+ "4 - Visualizar estoque\n"
+							+ "5 - Relatório de filmes alugados\n"
+							+ "6 - Lista de clientes\n"
+							+ "Pressione outra tecla para sair."));
+
 
 		} while (true);
 	}
