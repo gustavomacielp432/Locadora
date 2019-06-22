@@ -5,9 +5,9 @@ package org.locadora.model;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
-import org.locadora.dao.DisponivelDAO;
-import org.locadora.dao.IndisponivelDAO;
-import org.locadora.dao.StateFilmeDAO;
+import org.locadora.controller.Disponivel;
+import org.locadora.controller.Indisponivel;
+import org.locadora.controller.StateFilme;
 
 @Entity
 public class Filme extends BaseEntity {
@@ -18,13 +18,13 @@ public class Filme extends BaseEntity {
 	private String classificacao;
 	private int estoque;
 	@Transient
-	private StateFilmeDAO disponibilidade;
+	private StateFilme disponibilidade;
 
 	public Filme(String nome, String classificacao, int estoque) {
 		this.nome = nome;
 		this.classificacao = classificacao;
 		this.estoque = estoque;
-		disponibilidade=new IndisponivelDAO();
+		
 	}
 
 	public Filme() {
@@ -56,20 +56,21 @@ public class Filme extends BaseEntity {
 	}
 
 	public String visualizarFilmes() {
-		String status;
+		
 		if(disponibilidade.disponibilidade()) {status= "disponivel";}else {status= "indisponivel";}
 		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " + "Class.: "
-				+ classificacao + " = "+status ;
+				+ classificacao ;
 	}
 
-	public void atualizarDisponibilidade(int estoque) {
-		disponibilidade = disponibilidade.estoqueDisponibilidade(estoque);
+	public StateFilme getDisponibilidade() {
+		return disponibilidade;
 	}
 
-	public boolean disponibilidade() {
-
-		return disponibilidade.disponibilidade();
+	public void setDisponibilidade(StateFilme disponibilidade) {
+		this.disponibilidade = disponibilidade;
 	}
+
+	
 
 	
 
