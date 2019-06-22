@@ -1,4 +1,6 @@
 package org.locadora.model;
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -13,10 +15,10 @@ public class Cliente extends BaseEntity{
 	@Column(name="cpf", unique=true)
 	private String cpf;
 	private String endereco;
-	private String dataNasc;
+	private LocalDate dataNasc;
 	
 	
-	public Cliente(String nome, String cpf, String endereco, String dataNasc) {
+	public Cliente(String nome, String cpf, String endereco, LocalDate dataNasc) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.endereco = endereco;
@@ -46,10 +48,10 @@ public class Cliente extends BaseEntity{
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public String getDataNasc() {
+	public LocalDate getDataNasc() {
 		return dataNasc;
 	}
-	public void setDataNasc(String dataNasc) {
+	public void setDataNasc(LocalDate dataNasc) {
 		this.dataNasc = dataNasc;
 	}
 
