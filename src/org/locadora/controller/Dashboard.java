@@ -141,9 +141,7 @@ public class Dashboard {
 				locadora.cadastrarFilme(nomeFilm, classificacao, estoque);
 				break;
 			}
-
 			case 3: {
-
 				try {
 
 					// String strEstoque = "";
