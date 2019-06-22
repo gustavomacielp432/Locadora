@@ -1,6 +1,13 @@
 package org.locadora.model;
 
+
+
 import javax.persistence.Entity;
+import javax.persistence.Transient;
+
+import org.locadora.dao.DisponivelDAO;
+import org.locadora.dao.IndisponivelDAO;
+import org.locadora.dao.StateFilmeDAO;
 
 @Entity
 public class Filme extends BaseEntity {
@@ -10,13 +17,14 @@ public class Filme extends BaseEntity {
 	private String nome;
 	private String classificacao;
 	private int estoque;
-	private StateFilme disponibilidade;
+	@Transient
+	private StateFilmeDAO disponibilidade;
 
 	public Filme(String nome, String classificacao, int estoque) {
 		this.nome = nome;
 		this.classificacao = classificacao;
 		this.estoque = estoque;
-		disponibilidade=new Indisponivel();
+		disponibilidade=new IndisponivelDAO();
 	}
 
 	public Filme() {
