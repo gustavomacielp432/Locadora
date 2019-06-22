@@ -14,6 +14,8 @@ import org.locadora.model.FilmeAlugado;
  * 117114337
  * Gustavo Maciel Pimenta
  * 11621522
+ * Leandro Gama
+ * 116121015
  */
 
 public class Dashboard {
