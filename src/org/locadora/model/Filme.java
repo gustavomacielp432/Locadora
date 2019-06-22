@@ -57,7 +57,7 @@ public class Filme extends BaseEntity {
 
 	public String visualizarFilmes() {
 		
-		if(disponibilidade.disponibilidade()) {status= "disponivel";}else {status= "indisponivel";}
+		
 		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " + "Class.: "
 				+ classificacao ;
 	}
