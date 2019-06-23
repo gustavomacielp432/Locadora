@@ -42,8 +42,9 @@ public class FilmeAlugado extends BaseEntity {
 		this.filme = filme;
 	}
 
-	public String visualizarFilmes() {
-		return cliente.toString() + "| " + filme.visualizarFilmes();
+	@Override
+	public String toString() {
+		return cliente.toString() + "| " + filme.toString();
 	}
 
 }
