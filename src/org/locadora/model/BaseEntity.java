@@ -16,18 +16,18 @@ public abstract class BaseEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private Date dataInclusao;
-	
+
 	private Date dataAlteracao;
 
 	public BaseEntity() {
 	}
-	
+
 	public BaseEntity(Integer id) {
-		this.id=id;
+		this.id = id;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

@@ -9,12 +9,6 @@ import org.locadora.model.Cliente;
 import org.locadora.model.Filme;
 import org.locadora.model.FilmeAlugado;
 
-/*
- * Andreia Letícia de Faria
- * 117114337
- * Gustavo Maciel Pimenta
- * 11621522
- */
 
 public class Dashboard {
 
@@ -34,12 +28,12 @@ public class Dashboard {
 		do {
 
 			String strOp = JOptionPane
-					.showInputDialog("Selecione uma opção:\n"
+					.showInputDialog("Selecione uma opï¿½ï¿½o:\n"
 							+ "1 - Cadastrar cliente\n"
 							+ "2 - Cadastrar filme\n"
 							+ "3 - Alugar Filme\n"
 							+ "4 - Visualizar estoque\n"
-							+ "5 - Relatório de filmes alugados\n"
+							+ "5 - Relatï¿½rio de filmes alugados\n"
 							+ "6 - Lista de clientes\n"
 							+ "Pressione outra tecla para sair.");
 
@@ -59,11 +53,11 @@ public class Dashboard {
 					if (Dashboard.isNumero(cpf)) {
 						break;
 					} else {
-						JOptionPane.showMessageDialog(null, "CPF inválido.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "CPF invï¿½lido.", "Atenï¿½ï¿½o!", 0);
 					}
 				} while (true);
 
-				String endereco = JOptionPane.showInputDialog("Digite o endereço");
+				String endereco = JOptionPane.showInputDialog("Digite o endereï¿½o");
 
 				String dataNasc;
 				do {
@@ -71,7 +65,7 @@ public class Dashboard {
 					if (Dashboard.isNumero(dataNasc)) {
 						break;
 					} else {
-						JOptionPane.showMessageDialog(null, "Data inválida.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "Data invï¿½lida.", "Atenï¿½ï¿½o!", 0);
 					}
 				} while (true);
 
@@ -82,7 +76,7 @@ public class Dashboard {
 			case 2: {
 
 				String nomeFilm = JOptionPane.showInputDialog("Digite o nome do filme");
-				String classificacao = JOptionPane.showInputDialog("Digite a classificação - Livre ou Adulto");
+				String classificacao = JOptionPane.showInputDialog("Digite a classificaï¿½ï¿½o - Livre ou Adulto");
 				String strEstoque;
 				int estoque;
 				do {
@@ -92,7 +86,7 @@ public class Dashboard {
 						break;
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Quantidade inválida.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "Quantidade invï¿½lida.", "Atenï¿½ï¿½o!", 0);
 					}
 
 				} while (true);
@@ -116,7 +110,7 @@ public class Dashboard {
 							idAlugar = Integer.parseInt(strIdAlugar);
 							break;
 						} else {
-							JOptionPane.showMessageDialog(null, "Id inválido!.", "Atenção!", 0);
+							JOptionPane.showMessageDialog(null, "Id invï¿½lido!.", "Atenï¿½ï¿½o!", 0);
 						}
 
 					} while (true);
@@ -129,9 +123,9 @@ public class Dashboard {
 						Cliente clienteAlugar = locadora.encontrarCliente(cpfAlugar);
 
 						locadora.alugarFilme(filmeAlugar, clienteAlugar);
-						
+
 					} else {
-						JOptionPane.showMessageDialog(null, "ID e/ou CPF incorretos.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "ID e/ou CPF incorretos.", "Atenï¿½ï¿½o!", 0);
 					}
 
 					break;

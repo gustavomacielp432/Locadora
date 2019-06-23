@@ -1,5 +1,13 @@
 package org.locadora.model;
+<<<<<<< HEAD
 import javax.persistence.Entity;
+=======
+
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+
+import org.locadora.controller.StateFilme;
+>>>>>>> state-merged
 
 @Entity
 public class Filme extends BaseEntity{
@@ -16,6 +24,10 @@ public class Filme extends BaseEntity{
 		this.nome = nome;
 		this.classificacao = classificacao;
 		this.estoque = estoque;
+<<<<<<< HEAD
+=======
+
+>>>>>>> state-merged
 	}
 	
 	public Filme() {
@@ -45,10 +57,27 @@ public class Filme extends BaseEntity{
 	public void setEstoque(int estoque) {
 		this.estoque = estoque;
 	}
+<<<<<<< HEAD
 	
 	
 
 	public String visualizarFilmes() {
 		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " +  "Class.: " + classificacao;
 	}
+=======
+
+	public StateFilme getDisponibilidade() {
+		return disponibilidade;
+	}
+
+	public void setDisponibilidade(StateFilme disponibilidade) {
+		this.disponibilidade = disponibilidade;
+	}
+
+	public String visualizarFilmes() {
+		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " + "Class.: "
+				+ classificacao;
+	}
+
+>>>>>>> state-merged
 }
