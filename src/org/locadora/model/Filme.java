@@ -1,8 +1,6 @@
 package org.locadora.model;
 
 import javax.persistence.Entity;
-
-import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import org.locadora.controller.StateFilme;
