@@ -1,5 +1,8 @@
 package org.locadora.controller;
 
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +24,6 @@ public class Dashboard {
 	public static void main(String[] args) {
 
 		Locadora locadora = new Locadora("Locadora de Filmes TPII");
-		int id = 0;
 		int op = 0;
 
 		do {
@@ -57,15 +59,27 @@ public class Dashboard {
 				} while (true);
 
 				String endereco = JOptionPane.showInputDialog("Digite o endereço");
+				LocalDate dataNasc;
 
-				String dataNasc;
 				do {
-					dataNasc = JOptionPane.showInputDialog("Digite a data de nascimento");
-					if (Dashboard.isNumero(dataNasc)) {
+
+					DateTimeFormatter formateDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+					try {
+
+						String data = JOptionPane.showInputDialog("Digite a data de nascimento");
+						dataNasc = LocalDate.parse(data, formateDate);
+
 						break;
+<<<<<<< HEAD
+					} catch (DateTimeException ex) {
+						JOptionPane.showMessageDialog(null, "Data inválida.", "Atenção!", 0);
+=======
 					} else {
 						JOptionPane.showMessageDialog(null, "Data invï¿½lida.", "Atenção!", 0);
+>>>>>>> origin/master
 					}
+
 				} while (true);
 
 				locadora.cadastrarCliente(nomeCli, cpf, endereco, dataNasc);
@@ -75,9 +89,39 @@ public class Dashboard {
 			case 2: {
 
 				String nomeFilm = JOptionPane.showInputDialog("Digite o nome do filme");
-				String classificacao = JOptionPane.showInputDialog("Digite a classificação - Livre ou Adulto");
+
+				String[] options = new String[] { "18", "16", "14", "12", "10", "L" };
+
+				int botoes = JOptionPane.showOptionDialog(null, "Qual a classificação indicativa de " + nomeFilm + "?",
+						"\n" + "Selecione a opção desejada. ", JOptionPane.DEFAULT_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+				String classificacao = "";
+
+				switch (botoes) {
+				case 0:
+					classificacao = "18";
+					break;
+				case 1:
+					classificacao = "16";
+					break;
+				case 2:
+					classificacao = "14";
+					break;
+				case 3:
+					classificacao = "12";
+					break;
+				case 4:
+					classificacao = "10";
+					break;
+				case 5:
+					classificacao = "L";
+					break;
+				}
+
 				String strEstoque;
 				int estoque;
+
 				do {
 					strEstoque = JOptionPane.showInputDialog("informe a quantidade em estoque");
 					if (Dashboard.isNumero(strEstoque)) {
@@ -93,13 +137,10 @@ public class Dashboard {
 				locadora.cadastrarFilme(nomeFilm, classificacao, estoque);
 				break;
 			}
-
 			case 3: {
-
 				try {
 
-					String strEstoque = "";
-
+					// String strEstoque = "";
 					int idAlugar;
 
 					do {
@@ -118,16 +159,28 @@ public class Dashboard {
 							.showInputDialog(locadora.getNome() + "\n" + "Digite o CPF do cliente");
 
 					if ((locadora.encontrarCliente(cpfAlugar) != null) && (locadora.encontrarFilme(idAlugar) != null)) {
+
 						Filme filmeAlugar = locadora.encontrarFilme(idAlugar);
 						Cliente clienteAlugar = locadora.encontrarCliente(cpfAlugar);
 
+<<<<<<< HEAD
+						if (locadora.isClienteElegivelParaAlugarFilme(filmeAlugar.getClassificacao(),
+								locadora.calcularIdade(clienteAlugar.getDataNasc())) == true) {
+							locadora.alugarFilme(filmeAlugar, clienteAlugar);
+						} else {
+							JOptionPane.showMessageDialog(null,
+									"Cliente não tem idade suficiente para alugar esse filme", "Atenção!", 0);
+						}
+=======
 						locadora.alugarFilme(filmeAlugar, clienteAlugar);
 
+>>>>>>> origin/master
 					} else {
 						JOptionPane.showMessageDialog(null, "ID e/ou CPF incorretos.", "Atenção!", 0);
 					}
 
 					break;
+
 				} catch (NullPointerException e) {
 					break;
 				}
