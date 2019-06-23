@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -184,7 +185,8 @@ public class Dashboard {
 
 				String strEstoque = "";
 				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
-				strEstoque = locadora.iteratorFilme(filmes);
+				Iterator<Filme> itFilmes=filmes.iterator();
+				strEstoque = locadora.iteratorFilme(itFilmes);
 				
 				
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strEstoque);

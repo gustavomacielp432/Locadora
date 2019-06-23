@@ -114,9 +114,9 @@ public class Locadora {
 		}
 	}
 	
-	public String iteratorFilme(ArrayList<Filme> filmes) {
+	public String iteratorFilme(Iterator<Filme> itFilmes) {
 		String strEstoque="";
-		Iterator<Filme> itFilmes=filmes.iterator();
+		
 		Filme filme;
 		while(itFilmes.hasNext()) {
 			filme=(Filme) itFilmes.next();
