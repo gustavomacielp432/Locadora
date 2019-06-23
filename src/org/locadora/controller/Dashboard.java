@@ -12,13 +12,6 @@ import org.locadora.model.Cliente;
 import org.locadora.model.Filme;
 import org.locadora.model.FilmeAlugado;
 
-/*
- * Andreia Letícia de Faria
- * 117114337
- * Gustavo Maciel Pimenta
- * 11621522
- */
-
 public class Dashboard {
 
 	public static boolean isNumero(String dado) {
@@ -31,15 +24,19 @@ public class Dashboard {
 	public static void main(String[] args) {
 
 		Locadora locadora = new Locadora("Locadora de Filmes TPII");
-		int id = 0;
 		int op = 0;
 
 		do {
 
 			String strOp = JOptionPane
-					.showInputDialog("Selecione uma opção:\n" + "1 - Cadastrar cliente\n" + "2 - Cadastrar filme\n"
-							+ "3 - Alugar Filme\n" + "4 - Visualizar estoque\n" + "5 - Relatório de filmes alugados\n"
-							+ "6 - Lista de clientes\n" + "Pressione outra tecla para sair.");
+					.showInputDialog("Selecione uma opção:\n"
+							+ "1 - Cadastrar cliente\n"
+							+ "2 - Cadastrar filme\n"
+							+ "3 - Alugar Filme\n"
+							+ "4 - Visualizar estoque\n"
+							+ "5 - Relatório de filmes alugados\n"
+							+ "6 - Lista de clientes\n"
+							+ "Pressione outra tecla para sair.");
 
 			if (Dashboard.isNumero(strOp)) {
 				op = Integer.parseInt(strOp);
@@ -85,12 +82,6 @@ public class Dashboard {
 			}
 
 			case 2: {
-
-				// String nomeFilm = JOptionPane.showInputDialog("Digite o nome do filme");
-				// String classificacao = JOptionPane.showInputDialog("Digite a classificação -
-				// Livre ou Adulto");
-				// String strEstoque;
-				// int estoque;
 
 				String nomeFilm = JOptionPane.showInputDialog("Digite o nome do filme");
 
@@ -180,34 +171,6 @@ public class Dashboard {
 
 					break;
 
-					/*
-					 * String strEstoque = "";
-					 * 
-					 * int idAlugar;
-					 * 
-					 * do { String strIdAlugar = JOptionPane.showInputDialog( locadora.getNome() +
-					 * "\n" + "Digite o ID do filme que deseja alugar:\n\n"); if
-					 * (Dashboard.isNumero(strIdAlugar)) { idAlugar = Integer.parseInt(strIdAlugar);
-					 * break; } else { JOptionPane.showMessageDialog(null, "Id inválido!.",
-					 * "Atenção!", 0); }
-					 * 
-					 * } while (true);
-					 * 
-					 * String cpfAlugar = JOptionPane .showInputDialog(locadora.getNome() + "\n" +
-					 * "Digite o CPF do cliente");
-					 * 
-					 * if ((locadora.encontrarCliente(cpfAlugar) != null) &&
-					 * (locadora.encontrarFilme(idAlugar) != null)) { Filme filmeAlugar =
-					 * locadora.encontrarFilme(idAlugar); Cliente clienteAlugar =
-					 * locadora.encontrarCliente(cpfAlugar);
-					 * 
-					 * locadora.alugarFilme(filmeAlugar, clienteAlugar);
-					 * 
-					 * } else { JOptionPane.showMessageDialog(null, "ID e/ou CPF incorretos.",
-					 * "Atenção!", 0); }
-					 * 
-					 * break;
-					 */
 				} catch (NullPointerException e) {
 					break;
 				}

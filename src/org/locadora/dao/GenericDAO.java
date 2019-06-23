@@ -1,4 +1,5 @@
 package org.locadora.dao;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
 import org.hibernate.Session;
-
 
 public abstract class GenericDAO<T, I extends Serializable> {
 
@@ -27,11 +27,12 @@ public abstract class GenericDAO<T, I extends Serializable> {
 		this.persistedClass = persistedClass;
 	}
 
-	//private SessionFactory sessionFactory;
-	
+	// private SessionFactory sessionFactory;
+
 	public Session getSession() {
 		return (Session) entityManager.getDelegate();
 	}
+
 	public T salvar(T entity) {
 		EntityTransaction t = entityManager.getTransaction();
 		t.begin();
