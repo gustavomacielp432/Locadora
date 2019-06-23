@@ -14,6 +14,11 @@ public class FilmeDAO extends GenericDAO<Filme, Integer> {
 		super.atualizar(filme);
 
 	}
+	public void aumentarEstoque(Filme filme) {
+		filme.setEstoque(filme.getEstoque()+1);
+		super.atualizar(filme);
+		
+	}
 
 	public void atualizarDisponibilidade(Filme filme) {
 		StateFilme disponibilidade;

@@ -32,10 +32,11 @@ public class Dashboard {
 					.showInputDialog("Selecione uma opção:\n"
 							+ "1 - Cadastrar cliente\n"
 							+ "2 - Cadastrar filme\n"
-							+ "3 - Alugar Filme\n"
-							+ "4 - Visualizar estoque\n"
-							+ "5 - Relatório de filmes alugados\n"
-							+ "6 - Lista de clientes\n"
+							+ "3 - Alugar filme\n"
+							+ "4 - Visualizar filmes disponiveis\n"
+							+ "5 - Visualizar estoque\n"
+							+ "6 - Relatório de filmes alugados\n"
+							+ "7 - Lista de clientes\n"
 							+ "Pressione outra tecla para sair.");
 
 			if (Dashboard.isNumero(strOp)) {
@@ -178,7 +179,18 @@ public class Dashboard {
 				}
 			}
 
+			
 			case 4: {
+
+				String strEstoque = "";
+				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
+				strEstoque = locadora.iteratorFilme(filmes);
+				
+				
+				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strEstoque);
+				break;
+			}
+			case 5: {
 
 				String strEstoque = "";
 				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
@@ -189,7 +201,8 @@ public class Dashboard {
 				break;
 			}
 
-			case 5: {
+
+			case 6: {
 
 				String strAlugados = "";
 				List<FilmeAlugado> filmesAlugados = locadora.filmesAlugados();
@@ -201,7 +214,7 @@ public class Dashboard {
 
 				break;
 			}
-			case 6:
+			case 7:
 				List<Cliente> clientes = locadora.listarClientes();
 				String strClientes = "";
 				for (Cliente cliente : clientes) {

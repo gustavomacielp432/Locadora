@@ -2,7 +2,8 @@ package org.locadora.controller;
 
 import java.time.LocalDate;
 import java.time.Period;
-
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -43,6 +44,8 @@ public class Locadora {
 			JOptionPane.showMessageDialog(null, "CPF não cadastrado.", "Atenção!", 0);
 		}
 	}
+
+	
 
 	public String getNome() {
 		return nome;
@@ -109,6 +112,22 @@ public class Locadora {
 		} else {
 			return false;
 		}
+	}
+	
+	public String iteratorFilme(ArrayList<Filme> filmes) {
+		String strEstoque="";
+		Iterator<Filme> itFilmes=filmes.iterator();
+		Filme filme;
+		while(itFilmes.hasNext()) {
+			filme=(Filme) itFilmes.next();
+			filmeDAO.atualizarDisponibilidade(filme);
+			if(filme.getDisponibilidade().disponibilidade()) {
+				strEstoque = strEstoque + filme.visualizarFilmes() + "\n";
+				
+			}
+			
+		}
+		return strEstoque;
 	}
 
 }
