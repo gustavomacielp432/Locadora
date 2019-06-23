@@ -1,12 +1,8 @@
 package org.locadora.model;
 
-
-
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
-import org.locadora.controller.Disponivel;
-import org.locadora.controller.Indisponivel;
 import org.locadora.controller.StateFilme;
 
 @Entity
@@ -24,7 +20,7 @@ public class Filme extends BaseEntity {
 		this.nome = nome;
 		this.classificacao = classificacao;
 		this.estoque = estoque;
-		
+
 	}
 
 	public Filme() {
@@ -55,13 +51,6 @@ public class Filme extends BaseEntity {
 		this.estoque = estoque;
 	}
 
-	public String visualizarFilmes() {
-		
-		if(disponibilidade.disponibilidade()) {status= "disponivel";}else {status= "indisponivel";}
-		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " + "Class.: "
-				+ classificacao ;
-	}
-
 	public StateFilme getDisponibilidade() {
 		return disponibilidade;
 	}
@@ -70,11 +59,9 @@ public class Filme extends BaseEntity {
 		this.disponibilidade = disponibilidade;
 	}
 
-	
+	public String visualizarFilmes() {
+		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " + "Class.: "
+				+ classificacao;
+	}
 
-	
-
-	
-
-	
 }

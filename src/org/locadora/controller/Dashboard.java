@@ -9,15 +9,6 @@ import org.locadora.model.Cliente;
 import org.locadora.model.Filme;
 import org.locadora.model.FilmeAlugado;
 
-/*
- * Andreia Letícia de Faria
- * 117114337
- * Gustavo Maciel Pimenta
- * 11621522
- * Leandro Gama
- * 116121015
- */
-
 public class Dashboard {
 
 	public static boolean isNumero(String dado) {
@@ -131,7 +122,7 @@ public class Dashboard {
 						Cliente clienteAlugar = locadora.encontrarCliente(cpfAlugar);
 
 						locadora.alugarFilme(filmeAlugar, clienteAlugar);
-						
+
 					} else {
 						JOptionPane.showMessageDialog(null, "ID e/ou CPF incorretos.", "Atenção!", 0);
 					}
