@@ -2,12 +2,9 @@ package org.locadora.controller;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import org.locadora.dao.ClienteDAO;
 import org.locadora.dao.FilmeAlugadoDAO;
 import org.locadora.dao.FilmeDAO;
@@ -16,6 +13,11 @@ import org.locadora.model.Filme;
 import org.locadora.model.FilmeAlugado;
 
 public class Locadora {
+
+	private static final int OP_FILMES_DISPONIVEIS = 0;
+	private static final String TIPO_CLIENTE = "Cliente";
+	private static final String TIPO_FILME = "Filme";
+	private static final String TIPO_FILME_ALUGADO = "FilmeAlugado";
 
 	private FilmeDAO filmeDAO = new FilmeDAO();
 	private FilmeAlugadoDAO filmeAlugadoDAO = new FilmeAlugadoDAO();
@@ -33,7 +35,6 @@ public class Locadora {
 				FilmeAlugado filmeAlugado = new FilmeAlugado(cliente, filme);
 				filmeAlugadoDAO.salvar(filmeAlugado);
 				filmeDAO.diminuirEstoque(filme);
-				filmeDAO.atualizarDisponibilidade(filme);
 
 				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "Atenção!", 1);
 
@@ -45,30 +46,32 @@ public class Locadora {
 		}
 	}
 
-	
-
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public List<Filme> getFilmes() {
+		return filmeDAO.getList();
 	}
 
-	public List<FilmeAlugado> filmesAlugados() {
+	public List<Cliente> getClientes() {
+		return clienteDAO.getList();
+	}
+
+	public List<FilmeAlugado> getFilmesAlugados() {
 		return filmeAlugadoDAO.getList();
-	}
-
-	public Cliente encontrarCliente(String cpf) {
-		return clienteDAO.buscarClientePorCPF(cpf);
 	}
 
 	public Cliente retornaCliente(int id) {
 		return clienteDAO.buscarPorChavePrimaria(id);
 	}
 
-	public List<Cliente> listarClientes() {
-		return clienteDAO.getList();
+	public Filme encontrarFilme(int id) {
+		return filmeDAO.buscarPorChavePrimaria(id);
+	}
+
+	public Cliente encontrarCliente(String cpf) {
+		return clienteDAO.buscarClientePorCPF(cpf);
 	}
 
 	public void cadastrarCliente(String nome, String cpf, String endereco, LocalDate dataNasc) {
@@ -78,16 +81,7 @@ public class Locadora {
 
 	public void cadastrarFilme(String nome, String classificacao, int estoque) {
 		Filme filme = new Filme(nome, classificacao, estoque);
-		filmeDAO.atualizarDisponibilidade(filme);
 		filmeDAO.salvar(filme);
-	}
-
-	public Filme encontrarFilme(int id) {
-		return filmeDAO.buscarPorChavePrimaria(id);
-	}
-
-	public List<Filme> getFilmes() {
-		return filmeDAO.getList();
 	}
 
 	public int calcularIdade(LocalDate date) {
@@ -113,21 +107,72 @@ public class Locadora {
 			return false;
 		}
 	}
-	
-	public String iteratorFilme(Iterator<Filme> itFilmes) {
-		String strEstoque="";
-		
-		Filme filme;
-		while(itFilmes.hasNext()) {
-			filme=(Filme) itFilmes.next();
-			filmeDAO.atualizarDisponibilidade(filme);
-			if(filme.getDisponibilidade().disponibilidade()) {
-				strEstoque = strEstoque + filme.visualizarFilmes() + "\n";
-				
+
+	public String visualizaTodos(Iterator<?> iterator, String tipoObjeto) {
+		String str = "";
+		switch (tipoObjeto) {
+		case TIPO_CLIENTE: {
+			Cliente cliente;
+			while (iterator.hasNext()) {
+				cliente = (Cliente) iterator.next();
+				str = str + cliente.toString() + "\n";
 			}
-			
+			break;
 		}
-		return strEstoque;
+		case TIPO_FILME: {
+			Filme filme;
+			while (iterator.hasNext()) {
+				filme = (Filme) iterator.next();
+				str = str + filme.toString() + "\n";
+			}
+			break;
+
+		}
+		case TIPO_FILME_ALUGADO: {
+			FilmeAlugado filmeAlugado;
+			while (iterator.hasNext()) {
+				filmeAlugado = (FilmeAlugado) iterator.next();
+				str = str + filmeAlugado.toString() + "\n";
+			}
+			break;
+		}
+		default: {
+			str = "Tipo inválido!";
+		}
+		}
+
+		return str;
+	}
+
+	public static void atualizarDisponibilidade(Filme filme) {
+		StateFilme disponibilidade;
+		disponibilidade = new Indisponivel();
+		filme.setStatusFilme(disponibilidade.estoqueDisponibilidade(filme.getEstoque()));
+
+	}
+
+	public String visualizaSelecionados(Iterator<?> iterator, int operacao) {
+		String str = "";
+
+		switch (operacao) {
+		case OP_FILMES_DISPONIVEIS: {
+			Filme filme;
+			while (iterator.hasNext()) {
+				filme = (Filme) iterator.next();
+				Locadora.atualizarDisponibilidade(filme);
+				if (filme.getStatusFilme().disponibilidade()) {
+					str = str + filme.toString() + "\n";
+				}
+			}
+			break;
+		}
+		default:
+			str = "Operação inválida!";
+			break;
+		}
+
+		return str;
+
 	}
 
 }

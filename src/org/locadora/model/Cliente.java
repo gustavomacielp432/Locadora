@@ -1,7 +1,6 @@
 package org.locadora.model;
 
 import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 

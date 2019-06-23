@@ -2,7 +2,6 @@ package org.locadora.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Transient;
-
 import org.locadora.controller.StateFilme;
 
 @Entity
@@ -14,7 +13,7 @@ public class Filme extends BaseEntity {
 	private String classificacao;
 	private int estoque;
 	@Transient
-	private StateFilme disponibilidade;
+	private StateFilme statusFilme;
 
 	public Filme(String nome, String classificacao, int estoque) {
 		this.nome = nome;
@@ -50,15 +49,16 @@ public class Filme extends BaseEntity {
 		this.estoque = estoque;
 	}
 
-	public StateFilme getDisponibilidade() {
-		return disponibilidade;
+	public StateFilme getStatusFilme() {
+		return statusFilme;
 	}
 
-	public void setDisponibilidade(StateFilme disponibilidade) {
-		this.disponibilidade = disponibilidade;
+	public void setStatusFilme(StateFilme novoStatus) {
+		this.statusFilme = novoStatus;
 	}
 
-	public String visualizarFilmes() {
+	@Override
+	public String toString() {
 		return "ID: " + super.getId() + " | " + "Nome: " + nome + " | " + "Qtd: " + estoque + " | " + "Class.: "
 				+ classificacao;
 	}

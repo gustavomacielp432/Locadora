@@ -15,6 +15,11 @@ import org.locadora.model.FilmeAlugado;
 
 public class Dashboard {
 
+	private static final int OP_FILMES_DISPONIVEIS = 0;
+	private static final String TIPO_CLIENTE = "Cliente";
+	private static final String TIPO_FILME = "Filme";
+	private static final String TIPO_FILME_ALUGADO = "FilmeAlugado";
+
 	public static boolean isNumero(String dado) {
 		if (dado.matches("[0-9]*")) {
 			return true;
@@ -39,7 +44,6 @@ public class Dashboard {
 							+ "6 - Relatório de filmes alugados\n"
 							+ "7 - Lista de clientes\n"
 							+ "Pressione outra tecla para sair.");
-
 			if (Dashboard.isNumero(strOp)) {
 				op = Integer.parseInt(strOp);
 			} else {
@@ -56,7 +60,7 @@ public class Dashboard {
 					if (Dashboard.isNumero(cpf)) {
 						break;
 					} else {
-						JOptionPane.showMessageDialog(null, "CPF invï¿½lido.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "CPF inválido.", "Atenção!", 0);
 					}
 				} while (true);
 
@@ -128,7 +132,7 @@ public class Dashboard {
 						break;
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Quantidade invï¿½lida.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "Quantidade inválida.", "Atenção!", 0);
 					}
 
 				} while (true);
@@ -180,15 +184,13 @@ public class Dashboard {
 				}
 			}
 
-			
 			case 4: {
 
 				String strEstoque = "";
 				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
-				Iterator<Filme> itFilmes=filmes.iterator();
-				strEstoque = locadora.iteratorFilme(itFilmes);
-				
-				
+				Iterator<Filme> itFilmes = filmes.iterator();
+				strEstoque = locadora.visualizaSelecionados(itFilmes, OP_FILMES_DISPONIVEIS);
+
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strEstoque);
 				break;
 			}
@@ -196,32 +198,30 @@ public class Dashboard {
 
 				String strEstoque = "";
 				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
-				for (int i = 0; i < filmes.size(); i++) {
-					strEstoque = strEstoque + filmes.get(i).visualizarFilmes() + "\n";
-				}
+				Iterator<Filme> iterator = filmes.iterator();
+				strEstoque = locadora.visualizaTodos(iterator, TIPO_FILME);
+
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strEstoque);
 				break;
 			}
 
-
 			case 6: {
 
 				String strAlugados = "";
-				List<FilmeAlugado> filmesAlugados = locadora.filmesAlugados();
-				for (int i = 0; i < filmesAlugados.size(); i++) {
-					strAlugados = strAlugados + filmesAlugados.get(i).visualizarFilmes() + "\n";
-				}
+				List<FilmeAlugado> filmesAlugados = locadora.getFilmesAlugados();
+				Iterator<FilmeAlugado> iterator = filmesAlugados.iterator();
+				strAlugados = locadora.visualizaTodos(iterator, TIPO_FILME_ALUGADO);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strAlugados);
 
 				break;
 			}
 			case 7:
-				List<Cliente> clientes = locadora.listarClientes();
+				List<Cliente> clientes = locadora.getClientes();
 				String strClientes = "";
-				for (Cliente cliente : clientes) {
-					strClientes += cliente.toString() + "\n";
-				}
+				Iterator<Cliente> iterator = clientes.iterator();
+				strClientes = locadora.visualizaTodos(iterator, TIPO_CLIENTE);
+
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strClientes);
 				break;
 			default: {
