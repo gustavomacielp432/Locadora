@@ -1,10 +1,7 @@
 package org.locadora.dao;
-<<<<<<< HEAD
-=======
 
 import org.locadora.controller.Indisponivel;
 import org.locadora.controller.StateFilme;
->>>>>>> state-merged
 import org.locadora.model.Filme;
 
 public class FilmeDAO extends GenericDAO<Filme, Integer> {
@@ -17,8 +14,6 @@ public class FilmeDAO extends GenericDAO<Filme, Integer> {
 		super.atualizar(filme);
 
 	}
-<<<<<<< HEAD
-=======
 
 	public void atualizarDisponibilidade(Filme filme) {
 		StateFilme disponibilidade;
@@ -32,5 +27,4 @@ public class FilmeDAO extends GenericDAO<Filme, Integer> {
 		disponibilidade = filme.getDisponibilidade();
 		return disponibilidade.disponibilidade();
 	}
->>>>>>> state-merged
 }

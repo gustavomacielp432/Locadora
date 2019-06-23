@@ -29,15 +29,6 @@ public class Locadora {
 				FilmeAlugado filmeAlugado = new FilmeAlugado(cliente, filme);
 				filmeAlugadoDAO.salvar(filmeAlugado);
 				filmeDAO.diminuirEstoque(filme);
-<<<<<<< HEAD
-				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "AtenÃ§Ã£o!", 1);
-			
-			}else {
-				JOptionPane.showMessageDialog(null, "Estoque insuficiente.", "AtenÃ§Ã£o!", 0);
-			}
-		}else {
-			JOptionPane.showMessageDialog(null, "CPF nÃ£o cadastrado.", "AtenÃ§Ã£o!", 0);
-=======
 				filmeDAO.atualizarDisponibilidade(filme);
 
 				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "Atenção!", 1);
@@ -47,7 +38,6 @@ public class Locadora {
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "CPF não cadastrado.", "Atenção!", 0);
->>>>>>> state-merged
 		}
 	}
 
@@ -82,12 +72,8 @@ public class Locadora {
 
 	public void cadastrarFilme(String nome, String classificacao, int estoque) {
 		Filme filme = new Filme(nome, classificacao, estoque);
-<<<<<<< HEAD
-		filmeDAO.salvar(filme);		
-=======
 		filmeDAO.atualizarDisponibilidade(filme);
 		filmeDAO.salvar(filme);
->>>>>>> state-merged
 	}
 
 	public Filme encontrarFilme(int id) {

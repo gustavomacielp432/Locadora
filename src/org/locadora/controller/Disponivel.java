@@ -1,7 +1,5 @@
 package org.locadora.controller;
 
-
-
 public class Disponivel implements StateFilme {
 
 	public StateFilme estoqueDisponibilidade(int estoque) {
