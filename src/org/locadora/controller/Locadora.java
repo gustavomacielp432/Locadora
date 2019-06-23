@@ -1,7 +1,10 @@
 package org.locadora.controller;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.Period;
+=======
+>>>>>>> origin/master
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -25,13 +28,23 @@ public class Locadora {
 	}
 
 	public void alugarFilme(Filme filme, Cliente cliente) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 		if (filme != null && filme.getId() != -1 && cliente != null && !cliente.getCpf().isEmpty()) {
 			if (filme.getEstoque() > 0) {
 				FilmeAlugado filmeAlugado = new FilmeAlugado(cliente, filme);
 				filmeAlugadoDAO.salvar(filmeAlugado);
 				filmeDAO.diminuirEstoque(filme);
 				filmeDAO.atualizarDisponibilidade(filme);
+<<<<<<< HEAD
 				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "Atenção!", 1);
+=======
+
+				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "Atenção!", 1);
+
+>>>>>>> origin/master
 			} else {
 				JOptionPane.showMessageDialog(null, "Estoque insuficiente.", "Atenção!", 0);
 			}
@@ -83,6 +96,7 @@ public class Locadora {
 		return filmeDAO.getList();
 	}
 
+<<<<<<< HEAD
 	public int calcularIdade(LocalDate date) {
 		int idade = Period.between(date, LocalDate.now()).getYears();
 		return idade;
@@ -106,4 +120,6 @@ public class Locadora {
 			return false;
 		}
 	}
+=======
+>>>>>>> origin/master
 }

@@ -54,7 +54,7 @@ public class Dashboard {
 					if (Dashboard.isNumero(cpf)) {
 						break;
 					} else {
-						JOptionPane.showMessageDialog(null, "CPF inválido.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "CPF invï¿½lido.", "Atenção!", 0);
 					}
 				} while (true);
 
@@ -71,8 +71,13 @@ public class Dashboard {
 						dataNasc = LocalDate.parse(data, formateDate);
 
 						break;
+<<<<<<< HEAD
 					} catch (DateTimeException ex) {
 						JOptionPane.showMessageDialog(null, "Data inválida.", "Atenção!", 0);
+=======
+					} else {
+						JOptionPane.showMessageDialog(null, "Data invï¿½lida.", "Atenção!", 0);
+>>>>>>> origin/master
 					}
 
 				} while (true);
@@ -124,7 +129,7 @@ public class Dashboard {
 						break;
 
 					} else {
-						JOptionPane.showMessageDialog(null, "Quantidade inválida.", "Atenção!", 0);
+						JOptionPane.showMessageDialog(null, "Quantidade invï¿½lida.", "Atenção!", 0);
 					}
 
 				} while (true);
@@ -145,7 +150,7 @@ public class Dashboard {
 							idAlugar = Integer.parseInt(strIdAlugar);
 							break;
 						} else {
-							JOptionPane.showMessageDialog(null, "Id inválido!.", "Atenção!", 0);
+							JOptionPane.showMessageDialog(null, "Id invï¿½lido!.", "Atenção!", 0);
 						}
 
 					} while (true);
@@ -158,6 +163,7 @@ public class Dashboard {
 						Filme filmeAlugar = locadora.encontrarFilme(idAlugar);
 						Cliente clienteAlugar = locadora.encontrarCliente(cpfAlugar);
 
+<<<<<<< HEAD
 						if (locadora.isClienteElegivelParaAlugarFilme(filmeAlugar.getClassificacao(),
 								locadora.calcularIdade(clienteAlugar.getDataNasc())) == true) {
 							locadora.alugarFilme(filmeAlugar, clienteAlugar);
@@ -165,6 +171,10 @@ public class Dashboard {
 							JOptionPane.showMessageDialog(null,
 									"Cliente não tem idade suficiente para alugar esse filme", "Atenção!", 0);
 						}
+=======
+						locadora.alugarFilme(filmeAlugar, clienteAlugar);
+
+>>>>>>> origin/master
 					} else {
 						JOptionPane.showMessageDialog(null, "ID e/ou CPF incorretos.", "Atenção!", 0);
 					}
