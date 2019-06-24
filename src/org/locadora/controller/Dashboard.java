@@ -28,8 +28,9 @@ public class Dashboard {
 	}
 
 	public static void main(String[] args) {
-
-		Locadora locadora = new Locadora("Locadora de Filmes TPII");
+		
+		LocadoraSingleton locadora = LocadoraSingleton.getInstance();
+		
 		int op = 0;
 
 		do {

@@ -12,8 +12,10 @@ import org.locadora.model.Cliente;
 import org.locadora.model.Filme;
 import org.locadora.model.FilmeAlugado;
 
-public class Locadora {
+public class LocadoraSingleton {
 
+	private static LocadoraSingleton instancia;
+	
 	private static final int OP_FILMES_DISPONIVEIS = 0;
 	private static final String TIPO_CLIENTE = "Cliente";
 	private static final String TIPO_FILME = "Filme";
@@ -24,9 +26,18 @@ public class Locadora {
 	private ClienteDAO clienteDAO = new ClienteDAO();
 	private String nome;
 
-	public Locadora(String nome) {
+	public LocadoraSingleton(String nome) {
 		this.nome = nome;
 	}
+	
+	public static synchronized LocadoraSingleton getInstance() {
+		if(instancia  == null){
+			instancia = new LocadoraSingleton("Locadora de Filmes TPII");
+		}
+		return instancia;
+	}
+	
+	
 
 	public void alugarFilme(Filme filme, Cliente cliente) {
 
@@ -39,7 +50,7 @@ public class Locadora {
 				JOptionPane.showMessageDialog(null, "Filme alugado com sucesso.", "Atenção!", 1);
 
 			} else {
-				JOptionPane.showMessageDialog(null, "Estoque insuficiente.", "Atenção!", 0);
+				JOptionPane.showMessageDialog(null, " Estoque insuficiente.", "Atenção!", 0);
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "CPF não cadastrado.", "Atenção!", 0);
@@ -101,7 +112,7 @@ public class Locadora {
 			return true;
 		} else if (idade >= 10 && classificacao.equals("10")) {
 			return true;
-		} else if (idade < 10 && classificacao.equals("L")) {
+		} else if (classificacao.equals("L")) {
 			return true;
 		} else {
 			return false;
@@ -159,7 +170,7 @@ public class Locadora {
 			Filme filme;
 			while (iterator.hasNext()) {
 				filme = (Filme) iterator.next();
-				Locadora.atualizarDisponibilidade(filme);
+				LocadoraSingleton.atualizarDisponibilidade(filme);
 				if (filme.getStatusFilme().disponibilidade()) {
 					str = str + filme.toString() + "\n";
 				}
