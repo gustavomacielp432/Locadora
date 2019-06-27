@@ -7,23 +7,10 @@ import java.util.List;
 
 import org.locadora.dao.ClienteDAO;
 import org.locadora.model.Cliente;
-import org.locadora.model.Filme;
 
 public class ClienteController {
 
 	private ClienteDAO clienteDAO = new ClienteDAO();
-
-	public List<Cliente> getClientes() {
-		return clienteDAO.getList();
-	}
-
-	public Cliente retornaCliente(int id) {
-		return clienteDAO.buscarPorChavePrimaria(id);
-	}
-
-	public Cliente encontrarCliente(String cpf) {
-		return clienteDAO.buscarClientePorCPF(cpf);
-	}
 
 	public void cadastrarCliente(String nome, String cpf, String endereco, LocalDate dataNasc) {
 		Cliente cliente = new Cliente(nome, cpf, endereco, dataNasc);
@@ -47,7 +34,7 @@ public class ClienteController {
 			return true;
 		} else if (idade >= 10 && classificacao.equals("10")) {
 			return true;
-		} else if (idade < 10 && classificacao.equals("L")) {
+		} else if (classificacao.equals("L")) {
 			return true;
 		} else {
 			return false;
@@ -64,6 +51,18 @@ public class ClienteController {
 			}
 		}
 		return valido;
+	}
+	
+	public List<Cliente> getClientes() {
+		return clienteDAO.getList();
+	}
+
+	public Cliente retornaCliente(int id) {
+		return clienteDAO.buscarPorChavePrimaria(id);
+	}
+
+	public Cliente encontrarCliente(String cpf) {
+		return clienteDAO.buscarClientePorCPF(cpf);
 	}
 
 }
