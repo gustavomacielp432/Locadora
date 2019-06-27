@@ -183,7 +183,19 @@ public class LocadoraSingleton {
 		}
 
 		return str;
-
 	}
+	
+	public boolean validarDuplicidadeCpf(Iterator<?> iterator, String cpf) {
+		boolean valido = false;
+		Cliente cliente;
+		while (iterator.hasNext()) {
+			cliente = (Cliente) iterator.next();
+			if(cliente.getCpf().equals(cpf)) {
+				valido = true;
+			}
+		}
+		return valido;
+	}
+
 
 }

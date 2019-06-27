@@ -53,17 +53,26 @@ public class Dashboard {
 			switch (op) {
 
 			case 1: {
-
+				ArrayList<Cliente> cliente = new ArrayList<>(locadora.getClientes());
+				Iterator<Cliente> iterator = cliente.iterator();
+				
 				String nomeCli = JOptionPane.showInputDialog("Digite o nome do cliente");
 				String cpf;
 				do {
+					
 					cpf = JOptionPane.showInputDialog("Digite o CPF");
-					if (Dashboard.isNumero(cpf)) {
-						break;
-					} else {
-						JOptionPane.showMessageDialog(null, "CPF inválido.", "Atenção!", 0);
-					}
+					if(locadora.validarDuplicidadeCpf(iterator, cpf) == true) {
+						JOptionPane.showMessageDialog(null, "CPF já cadastrado.", "Atenção!", 0);
+					}else{
+						if (Dashboard.isNumero(cpf)) {
+							break;
+						} else {
+							JOptionPane.showMessageDialog(null, "CPF inválido.", "Atenção!", 0);
+						}
+					};
+					
 				} while (true);
+				
 
 				String endereco = JOptionPane.showInputDialog("Digite o endereço");
 				LocalDate dataNasc;
