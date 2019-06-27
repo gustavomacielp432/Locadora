@@ -21,10 +21,7 @@ import org.locadora.model.Locadora;
 public class Dashboard {
 
 	private static final int OP_FILMES_DISPONIVEIS = 0;
-	private static final String TIPO_CLIENTE = "Cliente";
-	private static final String TIPO_FILME = "Filme";
-	private static final String TIPO_FILME_ALUGADO = "FilmeAlugado";
-
+	
 	private static Locadora locadora = Locadora.getInstance();
 
 	public static void main(String[] args) {
@@ -213,7 +210,7 @@ public class Dashboard {
 				String strEstoque = "";
 				ArrayList<Filme> filmes = new ArrayList<>(filmeController.getFilmes());
 				Iterator<Filme> iterator = filmes.iterator();
-				strEstoque = locadoraController.visualizaTodos(iterator, TIPO_FILME);
+				strEstoque = locadoraController.visualizaTodos(iterator);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strEstoque);
 				break;
@@ -224,7 +221,7 @@ public class Dashboard {
 				String strAlugados = "";
 				List<FilmeAlugado> filmesAlugados = filmeController.getFilmesAlugados();
 				Iterator<FilmeAlugado> iterator = filmesAlugados.iterator();
-				strAlugados = locadoraController.visualizaTodos(iterator, TIPO_FILME_ALUGADO);
+				strAlugados = locadoraController.visualizaTodos(iterator);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strAlugados);
 
@@ -234,7 +231,7 @@ public class Dashboard {
 				List<Cliente> clientes = clienteController.getClientes();
 				String strClientes = "";
 				Iterator<Cliente> iterator = clientes.iterator();
-				strClientes = locadoraController.visualizaTodos(iterator, TIPO_CLIENTE);
+				strClientes = locadoraController.visualizaTodos(iterator);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strClientes);
 				break;
