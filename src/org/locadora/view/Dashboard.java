@@ -1,4 +1,4 @@
-package org.locadora.controller;
+package org.locadora.view;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -9,9 +9,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.locadora.controller.LocadoraController;
 import org.locadora.model.Cliente;
 import org.locadora.model.Filme;
 import org.locadora.model.FilmeAlugado;
+import org.locadora.model.Locadora;
 
 public class Dashboard {
 
@@ -19,17 +21,13 @@ public class Dashboard {
 	private static final String TIPO_CLIENTE = "Cliente";
 	private static final String TIPO_FILME = "Filme";
 	private static final String TIPO_FILME_ALUGADO = "FilmeAlugado";
-
-	public static boolean isNumero(String dado) {
-		if (dado.matches("[0-9]*")) {
-			return true;
-		}
-		return false;
-	}
+	
+	private static Locadora locadora = Locadora.getInstance();
 
 	public static void main(String[] args) {
+		
+		LocadoraController locadoraController = new LocadoraController();
 
-		Locadora locadora = new Locadora("Locadora de Filmes TPII");
 		int op = 0;
 
 		do {
@@ -52,26 +50,26 @@ public class Dashboard {
 			switch (op) {
 
 			case 1: {
-				ArrayList<Cliente> cliente = new ArrayList<>(locadora.getClientes());
+				ArrayList<Cliente> cliente = new ArrayList<>(locadoraController.getClientes());
 				Iterator<Cliente> iterator = cliente.iterator();
-				
+
 				String nomeCli = JOptionPane.showInputDialog("Digite o nome do cliente");
 				String cpf;
 				do {
-					
+
 					cpf = JOptionPane.showInputDialog("Digite o CPF");
-					if(locadora.validarDuplicidadeCpf(iterator, cpf) == true) {
+					if (locadoraController.validarDuplicidadeCpf(iterator, cpf) == true) {
 						JOptionPane.showMessageDialog(null, "CPF já cadastrado.", "Atenção!", 0);
-					}else{
+					} else {
 						if (Dashboard.isNumero(cpf)) {
 							break;
 						} else {
 							JOptionPane.showMessageDialog(null, "CPF inválido.", "Atenção!", 0);
 						}
-					};
-					
+					}
+					;
+
 				} while (true);
-				
 
 				String endereco = JOptionPane.showInputDialog("Digite o endereço");
 				LocalDate dataNasc;
@@ -94,7 +92,7 @@ public class Dashboard {
 
 				} while (true);
 
-				locadora.cadastrarCliente(nomeCli, cpf, endereco, dataNasc);
+				locadoraController.cadastrarCliente(nomeCli, cpf, endereco, dataNasc);
 				break;
 			}
 
@@ -146,7 +144,7 @@ public class Dashboard {
 
 				} while (true);
 
-				locadora.cadastrarFilme(nomeFilm, classificacao, estoque);
+				locadoraController.cadastrarFilme(nomeFilm, classificacao, estoque);
 				break;
 			}
 			case 3: {
@@ -169,14 +167,14 @@ public class Dashboard {
 					String cpfAlugar = JOptionPane
 							.showInputDialog(locadora.getNome() + "\n" + "Digite o CPF do cliente");
 
-					if ((locadora.encontrarCliente(cpfAlugar) != null) && (locadora.encontrarFilme(idAlugar) != null)) {
+					if ((locadoraController.encontrarCliente(cpfAlugar) != null) && (locadoraController.encontrarFilme(idAlugar) != null)) {
 
-						Filme filmeAlugar = locadora.encontrarFilme(idAlugar);
-						Cliente clienteAlugar = locadora.encontrarCliente(cpfAlugar);
+						Filme filmeAlugar = locadoraController.encontrarFilme(idAlugar);
+						Cliente clienteAlugar = locadoraController.encontrarCliente(cpfAlugar);
 
-						if (locadora.isClienteElegivelParaAlugarFilme(filmeAlugar.getClassificacao(),
-								locadora.calcularIdade(clienteAlugar.getDataNasc())) == true) {
-							locadora.alugarFilme(filmeAlugar, clienteAlugar);
+						if (locadoraController.isClienteElegivelParaAlugarFilme(filmeAlugar.getClassificacao(),
+								locadoraController.calcularIdade(clienteAlugar.getDataNasc())) == true) {
+							locadoraController.alugarFilme(filmeAlugar, clienteAlugar);
 						} else {
 							JOptionPane.showMessageDialog(null,
 									"Cliente não tem idade suficiente para alugar esse filme", "Atenção!", 0);
@@ -196,9 +194,9 @@ public class Dashboard {
 			case 4: {
 
 				String strEstoque = "";
-				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
+				ArrayList<Filme> filmes = new ArrayList<>(locadoraController.getFilmes());
 				Iterator<Filme> itFilmes = filmes.iterator();
-				strEstoque = locadora.visualizaSelecionados(itFilmes, OP_FILMES_DISPONIVEIS);
+				strEstoque = locadoraController.visualizaSelecionados(itFilmes, OP_FILMES_DISPONIVEIS);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strEstoque);
 				break;
@@ -206,9 +204,9 @@ public class Dashboard {
 			case 5: {
 
 				String strEstoque = "";
-				ArrayList<Filme> filmes = new ArrayList<>(locadora.getFilmes());
+				ArrayList<Filme> filmes = new ArrayList<>(locadoraController.getFilmes());
 				Iterator<Filme> iterator = filmes.iterator();
-				strEstoque = locadora.visualizaTodos(iterator, TIPO_FILME);
+				strEstoque = locadoraController.visualizaTodos(iterator, TIPO_FILME);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strEstoque);
 				break;
@@ -217,19 +215,19 @@ public class Dashboard {
 			case 6: {
 
 				String strAlugados = "";
-				List<FilmeAlugado> filmesAlugados = locadora.getFilmesAlugados();
+				List<FilmeAlugado> filmesAlugados = locadoraController.getFilmesAlugados();
 				Iterator<FilmeAlugado> iterator = filmesAlugados.iterator();
-				strAlugados = locadora.visualizaTodos(iterator, TIPO_FILME_ALUGADO);
+				strAlugados = locadoraController.visualizaTodos(iterator, TIPO_FILME_ALUGADO);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strAlugados);
 
 				break;
 			}
 			case 7:
-				List<Cliente> clientes = locadora.getClientes();
+				List<Cliente> clientes = locadoraController.getClientes();
 				String strClientes = "";
 				Iterator<Cliente> iterator = clientes.iterator();
-				strClientes = locadora.visualizaTodos(iterator, TIPO_CLIENTE);
+				strClientes = locadoraController.visualizaTodos(iterator, TIPO_CLIENTE);
 
 				JOptionPane.showMessageDialog(null, locadora.getNome() + "\n\n" + strClientes);
 				break;
