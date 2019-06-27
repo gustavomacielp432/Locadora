@@ -32,7 +32,7 @@ public class Dashboard {
 		LocadoraController locadoraController = new LocadoraController();
 		ClienteController clienteController = new ClienteController();
 		FilmeController filmeController = new FilmeController();
-
+		
 		int op = 0;
 
 		do {
